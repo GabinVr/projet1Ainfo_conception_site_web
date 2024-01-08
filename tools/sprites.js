@@ -5,7 +5,11 @@
 // ctx : contexte graphique
 function canvasImage(imgURL,posX,posY,ctx)
 {
-	
+    var image = new Image();
+    image.src = imgURL;
+    image.alt = "image";
+
+    return image;
 }
 // -----------------------------------------------------------------------------------
 // Dessine l'image sur le canvas
