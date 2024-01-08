@@ -55,8 +55,6 @@ function CanvasSprite(spriteImgURL, x, y, nbXTiles, nbYTiles)
         this.height = image.height;
     });
     this.image = image;
-    this.widthTile = 512;
-    this.widthTile = 256;
     this.animations = [];
     this.currentAnimation = [];
     this.currentTile = 0;
@@ -133,7 +131,7 @@ CanvasSprite.prototype.tileY = function(tileIndex)
 // Dessine une tile
 CanvasSprite.prototype.drawTile = function(tileIndex, tx, ty)
 {
-    drawCanvasTile(this.image, tx, ty, this.widthTile, this.heightTile, this.x, this.y, this.widthTile, this.heightTile);   
+    drawCanvasTile(this.image, tx, ty, this.widthTile, this.heightTile, this.x, this.y, cv.width, cv.height);   
 };
 // ----------------------------------------------------------------------------------
 // Animation

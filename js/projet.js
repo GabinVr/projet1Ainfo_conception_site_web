@@ -8,6 +8,9 @@ var spriteSheep = new CanvasSprite("./images/sheeppoe.png", 0, 0, 16, 8);
 
 function update() {
     animNb();
+    correct_canvas();
+    sprite.stopAnim();
+    spriteSheep.stopAnim();
     startstop();
 }
 
@@ -57,13 +60,23 @@ function startstop() {
     else{
         if (anim == 0){
             sprite.selectAnimation(anim_name[anim]);
-            sprite.stopAnim();
+            sprite.stopAnim()
         }
         else{
             spriteSheep.selectAnimation(anim_name[anim]);
             spriteSheep.stopAnim();
         }
-        ctx.clearRect(0, 0, cv.width, cv.height);
         isRunning = false;
+    }
+}
+
+function correct_canvas() { 
+    if (anim==0){
+        document.getElementById("canvanim").setAttribute("width", 512);
+        document.getElementById("canvanim").setAttribute("height", 256);
+    }
+    else {
+        document.getElementById("canvanim").setAttribute("width", 265);
+        document.getElementById("canvanim").setAttribute("height", 200);
     }
 }
