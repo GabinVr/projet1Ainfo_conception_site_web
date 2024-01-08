@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<title>Projet Conception Site Web - 1A Info</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="stylesheet" href="tools/normalize.css">
+	<style>
+     * { text-align: center; }
+     #canvanim { width: 512px; height: 256px; border-width: 2px; border-style: solid; margin-left: auto; margin-right: auto;}
+     #stop_clic:hover { font-variant: small-caps; cursor: pointer; }
+   </style>
+</head>
+<body>
+	<h1>TP3-3</h1>
+	<div class="canva">
+		<canvas id="canvanim" width="40" height="53"> 
+			Ne supporte pas canvas.
+		</canvas>
+	</div>
+	<div id="stop_clic" onclick="startstop()">Start/Stop</div>
+	<script  src="tools/sprites.js"></script>
+	<script src="./js/ProjetMultipleAnimation.js"></script>
+</body>
+</html>
