@@ -12,14 +12,23 @@
    </style>
 </head>
 <body>
-	<h1>TP3-2</h1>
 	<div class="canva">
 		<canvas id="canvanim" width="512" height="256"> 
 			Ne supporte pas canvas.
 		</canvas>
 	</div>
-	<div id="stop_clic" onclick="startstop()">Start/Stop</div>
+	<div id="stop_clic" onclick="update()">Start/Stop</div>
+	<form id="choix_anim">
+		<label for="anims">Choisissez une animation</label>
+		<select name="anims" id="anims">
+			<option id="chat" value="chat" >Chat qui court</option>
+			<option id="court" value="court" >Mouton qui court</option>
+			<option id="roule" value="roule" >Mouton qui roule</option>
+			<option id="baille" value="baille" >Mouton qui baille</option>
+			<option id="fun" value="fun" >Mouton fun</option>
+		</select>
+	</form>
 	<script  src="tools/sprites.js"></script>
-	<script src="./js/projet.js"></script>
+	<script src="./projet.js"></script>
 </body>
 </html>

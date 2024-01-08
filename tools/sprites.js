@@ -20,17 +20,14 @@ function canvasImage(imgURL)
 // (posX,posY) : position du coin supérieur gauche de l'image dans le canvas
 function drawCanvasImage(image,posX,posY)
 {
-    image.addEventListener('load',imageLoaded,false);
-    function imageLoaded(evt) {
-        ctx.clearRect(0, 0, cv.width, cv.height);
-        ctx.drawImage(image,posX,posY);
-    }
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    ctx.drawImage(image,posX,posY);
 }
 
 function drawCanvasTile(image, tx, ty, twidth, theight, posX, posY, width, height)
 {
-        ctx.clearRect(0, 0, cv.width, cv.height);
-        ctx.drawImage(image, tx, ty, twidth, theight, posX, posY, width, height);
+    ctx.clearRect(0, 0, cv.width, cv.height);
+    ctx.drawImage(image, tx, ty, twidth, theight, posX, posY, width, height);
 }
 
 
@@ -52,17 +49,19 @@ function CanvasSprite(spriteImgURL, x, y, nbXTiles, nbYTiles)
     var image = canvasImage(spriteImgURL);
     image.addEventListener("load", () => {
         console.log("img chargée");
+        this.widthTile = Math.floor(image.width / nbXTiles);
+        this.heightTile = Math.floor(image.height / nbYTiles);
+        this.width = image.width;
+        this.height = image.height;
     });
     this.image = image;
     this.widthTile = 512;
-    this.heightTile = 256;
+    this.widthTile = 256;
     this.animations = [];
     this.currentAnimation = [];
     this.currentTile = 0;
     this.x = x;
     this.y = y;
-    this.width = image.width;
-    this.height = image.height;
     this.nbXTiles = nbXTiles;
     this.nbYTiles = nbYTiles;
     this.loop = false;
