@@ -17,7 +17,12 @@ function canvasImage(imgURL,posX,posY,ctx)
 // (posX,posY) : position du coin supérieur gauche de l'image dans le canvas
 function drawCanvasImage(image,posX,posY)
 {
-
+    image.addEventListener('load',imageLoaded,false);
+    function imageLoaded(evt) {
+        var cv = document.getElementById("canvaimage");
+        var ctx = cv.getContext("2d");
+        ctx.drawImage(image,posX,posY);
+    }
 }
 
 function drawCanvasTile(image, posX, posY, width, height, tx, ty, twitdh, theight)
@@ -128,15 +133,15 @@ CanvasSprite.prototype.drawTile = function(tileIndex, tx, ty)
 // Dessine une tile
 CanvasSprite.prototype.simpleAnim = function(tps)
 {
-    
-	while (this.loop) {
-        this.nextTile
-
-    }
+    if(loop) {
+        this.timeID = setInterval(this.nextTile,5000);
+     }
+	
 }
 // ----------------------------------------------------------------------------------
 CanvasSprite.prototype.stopAnim = function()
 {
-	
+	this.loop = false;
+    clearInterval(this.timeID)
 }
 // ----------------------------------------------------------------------------------
