@@ -16,6 +16,15 @@ function drawCanvasImage(image,posX,posY)
 
 }
 
+function drawCanvasTile(image, posX, posY, width, height, tx, ty, twitdh, theight)
+{
+    image.addEventListener('load', imageLoaded, false);
+    function imageLoaded(evt) {
+        var cv = document.getElementById("canvaimage");
+        var ctx = cv.getContext("2d");
+        ctx.drawImage(image, posX, posY, width, height, tx, ty, twitdh, theight);
+    }
+}
 
 
 // ===================================================================================
@@ -40,7 +49,7 @@ let Animation = {}
 // loop : animation en boucle (true) ou non (false)
 function CanvasSprite(spriteImgURL, x, y, widthTile, heightTile, nbXTiles, nbYTiles, ctx)
 {
-    this.image = canvasImage(spriteImgURL, x, y, ctx);
+    this.image = canvasImage(spriteImgURL);
     this.x = x;
     this.y = y;
     this.width = widthTile;
@@ -67,20 +76,31 @@ CanvasSprite.prototype.addAnimation = function(nameAnim, tiles)
 // Sélectionne une animation spécifique nameAnim
 CanvasSprite.prototype.selectAnimation = function(nameAnim,loop)
 {
-
     for (let animation of this.animations) {
         if (animation.name === nameAnim) {
-
+            this.currentAnimation =  [animation];
         }
     }
-    
 }
 // -----------------------------------------------------------------------------------
 // Sélectionne la tile suivante et la dessine, si la tile existe (mode sans boucle)
 // retourne false si la tile courrante est la dernière (mode sans boucle), true sinon
 CanvasSprite.prototype.nextTile = function()
 {
-	 
+    var tileIndex = -1;
+    for (let i = 0; i < this.currentAnimation(0).tiles.length - 1; i++) {
+        if (tile[i] === this.currentTile) {
+            tileIndex = i+1;
+        }
+    }
+    if (tileIndex == -1) {
+        return false;
+    }
+
+    var tx = (tileIndex+1) * (this.widthTile)%this.width;
+    var ty = (((tileIndex+1) / (this.width/this.widthTile)) * this.heightTile)% this.height;
+	this.currentTile = tileIndex;
+    this.drawTile(tileIndex, tx, ty);
 }
 // -----------------------------------------------------------------------------------
 // Retourne la position de la tile dans le sprite selon x
@@ -96,9 +116,9 @@ CanvasSprite.prototype.tileY = function(tileIndex)
 }
 // -----------------------------------------------------------------------------------
 // Dessine une tile
-CanvasSprite.prototype.drawTile = function(tileIndex)
+CanvasSprite.prototype.drawTile = function(tileIndex, tx, ty)
 {
-    drawCanvasImage(this.image, this.tileX, this.tileY);   
+    drawCanvasTile(this.image, this.tileX, this.tileY, tx, ty, this.widthTile, this.heightTile);   
 };
 // ----------------------------------------------------------------------------------
 // Dessine une tile
