@@ -1,3 +1,4 @@
+// Variables globales
 let cv = document.getElementById("canvanim");
 let ctx = cv.getContext("2d");
 
@@ -16,7 +17,7 @@ function canvasImage(imgURL)
 }
 // -----------------------------------------------------------------------------------
 // Dessine l'image sur le canvas
-// imge: graphics source
+// image: graphics source
 // (posX,posY) : position du coin supérieur gauche de l'image dans le canvas
 function drawCanvasImage(image,posX,posY)
 {
@@ -24,6 +25,8 @@ function drawCanvasImage(image,posX,posY)
     ctx.drawImage(image,posX,posY);
 }
 
+// -----------------------------------------------------------------------------------
+// Dessine la tile sur le canvas
 function drawCanvasTile(image, tx, ty, twidth, theight, posX, posY, width, height)
 {
     ctx.clearRect(0, 0, cv.width, cv.height);
@@ -91,22 +94,7 @@ CanvasSprite.prototype.selectAnimation = function(nameAnim)
 // Sélectionne la tile suivante et la dessine, si la tile existe (mode sans boucle)
 // retourne false si la tile courrante est la dernière (mode sans boucle), true sinon
 CanvasSprite.prototype.nextTile = function()
-{
-    /* var tileIndex = -1;
-    for (let i = 0; i < (this.currentAnimation).length - 1; i++) {
-        if (this.currentAnimation[i] == this.currentTile) {
-            tileIndex = i+1;
-        }
-    }
-    if (tileIndex == -1) {
-        return false;
-    } 
-
-    var tx = (tileIndex+1) * (this.widthTile)%this.width;
-    var ty = (((tileIndex+1) / (this.width/this.widthTile)) * this.heightTile)% this.height;
-	this.currentTile = tileIndex;*/
-
-    
+{    
     var tx = this.widthTile*this.tileX(this.currentAnimation[this.currentTile]);
     var ty = this.heightTile*this.tileY(this.currentAnimation[this.currentTile]);
     this.drawTile(this.currentTile, tx, ty);
@@ -134,15 +122,14 @@ CanvasSprite.prototype.drawTile = function(tileIndex, tx, ty)
     drawCanvasTile(this.image, tx, ty, this.widthTile, this.heightTile, this.x, this.y, cv.width, cv.height);   
 };
 // ----------------------------------------------------------------------------------
-// Animation
+// Animation simple
 CanvasSprite.prototype.simpleAnim = function(tps)
 {
     this.loop = true;
     this.timeID = setInterval(() => this.nextTile(),tps);
-     
-	
 }
 // ----------------------------------------------------------------------------------
+// Arrete l'animation
 CanvasSprite.prototype.stopAnim = function()
 {
 	this.loop = false;
